@@ -22,6 +22,8 @@ import Form2 from "./Form2";
 import { isEmpty } from "../helpers";
 import axios from "axios";
 
+import { GOOGLE_MACRO_URL } from "../config";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -298,12 +300,33 @@ class FormContainer extends Component {
       });
       return;
     }
+    var ts = new Date();
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbyPi6dBLxshnYWff4DLyXMtH5GHF64kwVYljokjThKAffADRgDM/exec",
+        GOOGLE_MACRO_URL,
         {
-          hello: "hey",
-          hello1: "how",
+          date: ts.toLocaleString(),
+          type: this.state.type.value,
+          state: this.state.state.value,
+          district: this.state.district.value,
+          campName: this.state.campName.value,
+          runBy: this.state.runBy.value,
+          facilities: this.state.facilities.value,
+          name: this.state.name.value,
+          age: this.state.age.value,
+          gender: this.state.gender.value,
+          occupation: this.state.occupation.value,
+          mobile: this.state.mobile.value,
+          lastAddress: this.state.lastAddress.value,
+          nativeDistrict: this.state.nativeDistrict.value,
+          nativeState: this.state.nativeState.value,
+          haveBank: this.state.haveBank.value,
+          haveJandhan: this.state.haveJandhan.value,
+          accNo: this.state.accNo.value,
+          ifsc: this.state.ifsc.value,
+          ujjwala: this.state.ujjwala.value,
+          aadhaar: this.state.aadhaar.value,
+          otherOccupation: this.state.otherOccupation.value
         }
       )
       .then((resp) => {
