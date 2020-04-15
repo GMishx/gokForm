@@ -11,7 +11,6 @@ import { isEmpty, getStates, getDistrict } from "../helpers";
 export default function AddressForm(props) {
   const { data } = props;
   console.log(props);
-  data.state.value = "Karnataka";
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

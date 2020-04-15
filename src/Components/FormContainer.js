@@ -105,7 +105,7 @@ class FormContainer extends Component {
       value: 0,
     },
     state: {
-      value: "Andaman Nicobar",
+      value: "Karnataka",
       focused: false,
     },
     district: {
@@ -331,14 +331,33 @@ class FormContainer extends Component {
         }
       )
       .then((resp) => {
-        this.setState((prevState) => {
-          return {
-            activeStep: prevState.activeStep + 1,
-          };
-        });
+        if (resp.data.success === true) {
+          this.setState({
+            ui: {
+              success: true
+            }
+          });
+          this.setState((prevState) => {
+            return {
+              activeStep: prevState.activeStep + 1,
+            };
+          });
+        } else {
+          this.setState({
+            ui: {
+              errorMessage: resp.data.msg
+            }
+          });
+          this.setError();
+        }
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({
+          ui: {
+            errorMessage: err
+          }
+        });
+        this.setError();
       });
   };
 
@@ -506,6 +525,7 @@ class FormContainer extends Component {
 
   render() {
     const { classes, ui } = this.props;
+    ui.success = false;
     const {
       activeStep,
       state,
